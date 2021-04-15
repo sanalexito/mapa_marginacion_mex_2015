@@ -8,12 +8,10 @@ capa_estados <-readOGR("Dir/conjunto_de_datos", layer= "areas_geoestadisticas_es
 marginacion <- read.csv("Dir/Base_Indice_de_marginacion_estatal_90-15.csv")
 marginacion$AÑO<-as.numeric(as.character(marginacion$AÑO))  
 
-#Obtengo las media de IM para 2015. 
 marginacion$f<-ifelse(!marginacion$NOM_ENT%in%"Nacional",1,0)
 mar1<-marginacion[marginacion$f%in%1,c("AÑO","CVE_ENT","NOM_ENT","IM")]
 mar1$id<-mar1$CVE_ENT
 mar1$IM<-as.numeric(as.character(mar1$IM))
-mar1$mediaIM<-mean(mar1$IM)
 mar1<-mar1[mar1$AÑO%in%2015,]
 summary(mean(mar1$IM))
 
